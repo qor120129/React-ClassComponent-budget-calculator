@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ExpenseItem from './ExpenseItem'
 import '../css/ExpenseList.css'
-import { MdDelete, MdEdit } from 'react-icons/md'
+import { MdDelete } from 'react-icons/md'
 
 
 export class ExpenseList extends Component {

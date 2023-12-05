@@ -57,7 +57,7 @@ body {
 
 .total_wrap {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .total {
@@ -75,7 +75,7 @@ body {
 /* btn */
 .btn_wrap {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .btn {
