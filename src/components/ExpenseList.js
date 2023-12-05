@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md'
 
 export class ExpenseList extends Component {
   render() {
-    console.log(this.props.expenseList)
+    console.log('inputValue', this.props.inputValue)
     return (
       <>
         <ul className='list'>
@@ -23,7 +23,7 @@ export class ExpenseList extends Component {
 
         </ul>
         <div className='btn_wrap'>
-          <button className='btn' onClick={()=> this.props.clickDeleteAll()}> 목록 지우기 <MdDelete /></button>
+          <button className='btn' onClick={() => this.props.clickDeleteAll()}> 목록 지우기 <MdDelete /></button>
         </div>
       </>
     )

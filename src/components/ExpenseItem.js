@@ -14,7 +14,7 @@ export class ExpenseItem extends Component {
           </div>
           <div className='btn_wrap'>
             <button className='btn edit'><MdEdit/></button>
-            <button className='btn delete'><MdDelete onClick={()=> this.props.clickDelete(this.props.expense.id)}/></button>
+            <button className='btn delete'><MdDelete onClick={()=> this.props.clickDelete(this.props.expense.id, this.props.expense.amount)}/></button>
           </div>
         </li>
       </>

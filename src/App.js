@@ -8,31 +8,52 @@ class App extends Component {
     super(props);
     this.state = {
       expenseList: [],
-      inputValue: [{ charge: '', amount: '' }]
+      inputValue: {},
+      charge: '',
+      amount: '',
     };
   }
+  id = 0
+  total= 0
 
-
-
-  clickDelete = (id) => {
+  clickDelete = (id, DeleteAmount) => {
     const newExpenseList = this.state.expenseList.filter((value) => value.id !== id)
     this.setState({ expenseList: newExpenseList })
+    this.total -= Number(DeleteAmount)
   }
 
   clickDeleteAll = () => {
-    this.setState({ expenseList: [] })
+    this.setState({
+      expenseList: [],
+    })
+    this.total = 0
   }
 
-  handleInput = (e) => {
+  inputChange = (e) => {
     const { name, value } = e.target;
-    const newExpenseList = { ...this.state.inputValue, [name]: value, }
-    this.setState({ inputValue: newExpenseList })
+    const newInputValue = { ...this.state.inputValue, [name]: value }
+    this.setState({
+      inputValue: newInputValue,
+      [name]: value
+    })
   }
 
-  id = 0
-  clickAdd = () => {
-    const newExpenseList = [{ ...this.state.inputValue, id: this.id++ }]
-    this.setState({ expenseList: this.state.expenseList.concat(newExpenseList) })
+
+
+  clickAdd = (e) => {
+    e.preventDefault()
+    const newExpenseList = { ...this.state.inputValue, id: this.id++ }
+    this.total += Number(this.state.amount)
+
+    if (this.state.amount && this.state.charge) {
+      this.setState({
+        expenseList: this.state.expenseList.concat(newExpenseList),
+        inputValue: {},
+        charge: '',
+        amount: '',
+      })
+
+    }
   }
 
   render() {
@@ -41,8 +62,11 @@ class App extends Component {
         <h1 className="title">예산 계산기</h1>
         <div className="expense_form">{
           <ExpenseForm
-            handleInput={this.handleInput}
+            inputChange={this.inputChange}
             clickAdd={this.clickAdd}
+            charge={this.state.charge}
+            amount={this.state.amount}
+
           />}
         </div>
         <div className="expense_lsit" >
@@ -57,7 +81,7 @@ class App extends Component {
         <div className="total_wrap">
           <div className="total">
             <span>총지출:</span>
-            <span>원</span>
+            <span>{this.total}원</span>
           </div>
         </div>
       </main>
