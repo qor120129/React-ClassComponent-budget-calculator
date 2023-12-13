@@ -8,7 +8,6 @@ class App extends Component {
     super(props);
     this.state = {
       expenseList: [],
-      inputValue: {},
       charge: '',
       amount: '',
     };
@@ -31,9 +30,7 @@ class App extends Component {
 
   inputChange = (e) => {
     const { name, value } = e.target;
-    const newInputValue = { ...this.state.inputValue, [name]: value }
     this.setState({
-      inputValue: newInputValue,
       [name]: value
     })
   }
@@ -42,13 +39,13 @@ class App extends Component {
 
   clickAdd = (e) => {
     e.preventDefault()
-    const newExpenseList = { ...this.state.inputValue, id: this.id++ }
-    this.total += Number(this.state.amount)
-
+    
     if (this.state.amount && this.state.charge) {
+      const newExpense = { amount: this.state.amount,  charge: this.state.charge, id: this.id++ }
+      const newExpenseList = [...this.state.expenseList, newExpense]
+      this.total += Number(this.state.amount)
       this.setState({
-        expenseList: this.state.expenseList.concat(newExpenseList),
-        inputValue: {},
+        expenseList: newExpenseList,
         charge: '',
         amount: '',
       })
